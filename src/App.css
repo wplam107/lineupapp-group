@@ -28,6 +28,19 @@ ul {
   list-style: none;
 }
 
+.chat-container {
+  color: white;
+  background-color: rgb(55, 50, 50);
+}
+
+.you-text {
+  color: rgb(255, 89, 0);
+}
+
+.other-text {
+  color: rgb(195, 0, 255)
+}
+
 .submit {
   cursor: pointer;
 }

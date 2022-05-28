@@ -7,10 +7,40 @@ import Chat from"./components/chat";
 function App() {
   const [username, setUsername] = useState("");
   const [chatLog, setChatLog] = useState([]);
+  const [chatText, setChatText] = useState("");
 
   useEffect(() => {
-    console.log(chatLog.length);
-  }, [chatLog]);
+    if (chatText !== "") {
+      const time = new Date(Date.now());
+      const newText = {
+        time: time.toTimeString(),
+        user: username,
+        text: chatText
+      };
+      console.log(newText);
+      fetch("http://localhost:3000/", {
+        method: "POST",
+        headers: {
+          'Content-type': "application/json"
+        },
+        body: JSON.stringify(newText)
+      })
+        .then(res => res.json())
+        .then(data => setChatLog(data));
+    };
+  }, [chatText]);
+
+  useEffect(() => {
+    async function getData() {
+      fetch("http://localhost:3000/")
+        .then(res => res.json())
+        .then(data => setChatLog(data));
+    }
+
+    const interval = setInterval(() => {
+      getData();
+    }, 1000);
+  }, []);
 
   return (
     <div className="App" key="app">
@@ -22,10 +52,10 @@ function App() {
           <LoginForm username={username} setUsername={setUsername} />
         </div>
         <div className="user-text">
-          <Input username={username} chatLog={chatLog} setChatLog={setChatLog} />
+          <Input setChatText={setChatText} />
         </div>
         <div className="ongoing-chat">
-          <Chat chatLog={chatLog} />
+          <Chat username={username} chatLog={chatLog} />
         </div>
       </div>
     </div>
