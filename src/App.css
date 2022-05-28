@@ -1,12 +1,39 @@
-.content {
-  height: 80%;
+.App {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  vertical-align: auto;
+  text-align: center;
+  color: black;
+  width: 100vw;
 }
 
-.App {
-  text-align: center;
+.content {
+  width: 100vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 50%;
+  margin: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+.submit {
+  cursor: pointer;
+}
+
+.chat-list {
+  color: black;
 }
 
 .App-logo {

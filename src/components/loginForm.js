@@ -1,43 +1,31 @@
-function LoginForm () {
+import { useState } from "react";
 
-  const handleSubmit = (e) => {
+function LoginForm ({ username, setUsername }) {
+  const [nameText, setNameText] = useState("");
 
-    var username = document.getElementById("username").innerText;
+  function handleSubmit(e) {
+    e.preventDefault();
+    setUsername(nameText);
+  }
 
-    if(username == "William")
-    {
-      console.log(username);
-      document.cookie = "username = William";
-      window.location.href = "index.html";
-
-        
-    // Check if user 2 is logging in.
-    }else if(username == "Wayne")
-    {
-        
-      document.cookie = "username = Wayne";
-      window.location.href = "index.html";
-        
-    /* 
-      If the login details are incorrect.   
-    */
-    }else
-    {
-        window.location.href = "";
-    }
-    }
-    ;
-
-  return (
-    <form>
-      {/* <script src = "logincheck.js"> </script> */}
-      <label htmlFor="login">
-        Login
-        <input id = "username" type="text" name="username" />
-      </label>
-      <button type="submit" value="Submit" onSubmit={handleSubmit}/>
-    </form>
-  );
+  if (username !== "") {
+    return (
+      <div>{username !== "" ? `Chatting as ${username}` : ""}</div>
+    );
+  } else {
+    return (
+      <div>
+        <label>
+          Login
+          <input id="username" type="text" onChange={(e) => {
+            const name = e.target.value;
+            setNameText(name);
+          }} />
+        </label>
+        <button onClick={handleSubmit}>Submit Name</button>
+      </div>
+    );
+  }
 }
 
 export default LoginForm;
